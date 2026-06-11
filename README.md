@@ -1,6 +1,6 @@
 # 🍅 PomodoroCC - 番茄钟
 
-一款简洁高效的桌面番茄钟软件，帮助你专注工作、管理任务。
+一款简洁高效的番茄钟应用，帮助你专注工作、管理任务。支持 **Windows 桌面** 和 **Android 手机**。
 
 使用 **Tauri 2** + 原生 Web 技术构建，体积小巧、运行轻量。
 
@@ -15,7 +15,7 @@
 - **💾 本地存储** — 任务列表和专注计数自动保存到本地，重启不丢失
 - **⌨️ 键盘快捷键** — 按空格键即可开始/暂停计时
 - **🎨 暗色主题** — 护眼深色界面，番茄红配色
-- **📱 轻量体积** — 安装包仅约 3MB，无需额外依赖
+- **📱 轻量体积** — 桌面安装包仅约 3MB，无需额外依赖
 
 ---
 
@@ -27,16 +27,17 @@
 
 ## 🚀 快速开始
 
-### 方式一：直接使用安装包（推荐）
+### 直接下载安装包（推荐）
 
-从 [Releases](../../releases) 页面下载最新安装包：
+| 平台 | 文件 | 说明 |
+|------|------|------|
+| 🖥️ Windows | `PomodoroCC_0.1.0_x64_zh-CN.msi` | 标准安装程序（推荐） |
+| 🖥️ Windows | `PomodoroCC_0.1.0_x64-setup.exe` | 自解压安装程序 |
+| 📱 Android | `PomodoroCC-v0.1.3.apk` | 安卓 APK 安装包 |
 
-| 格式 | 文件名 | 说明 |
-|------|--------|------|
-| **MSI** | `PomodoroCC_x64_zh-CN.msi` | 标准 Windows 安装程序 |
-| **NSIS** | `PomodoroCC_x64-setup.exe` | 自解压安装程序（体积更小） |
+> 🔗 **最新版本下载**: [v0.1.0 Release](https://github.com/Paoaoaoaoao/pomodoro-cc/releases/tag/v0.1.0)
 
-双击运行，按照提示完成安装即可。
+双击运行或拷贝到手机安装即可。
 
 ---
 
@@ -47,6 +48,32 @@
 - [Node.js](https://nodejs.org/) >= 18
 - [Rust](https://www.rust-lang.org/) >= 1.70
 - Windows 10/11（需安装 WebView2，通常系统自带）
+- 安卓构建需额外安装 [Android Studio](https://developer.android.com/studio) + JDK 17
+
+### 安装与运行
+
+```bash
+# 1. 克隆仓库
+git clone https://github.com/Paoaoaoaoao/pomodoro-cc.git
+cd pomodoro-cc
+
+# 2. 安装依赖
+npm install
+
+# 3. 启动开发模式（桌面端，热重载）
+npm run tauri dev
+
+# 4. 构建桌面生产版本
+npm run tauri build
+
+# 5. 构建安卓 APK
+npx tauri android build --debug
+```
+
+桌面构建产物位于 `src-tauri/target/release/bundle/` 目录。
+安卓 APK 位于 `src-tauri/gen/android/app/build/outputs/apk/` 目录。
+
+---
 
 ## 📖 使用说明
 
@@ -81,15 +108,16 @@
 | 后端 | Rust |
 | 前端 | HTML + CSS + Vanilla JavaScript |
 | 存储 | Web Storage (localStorage) |
-| 通知 | Tauri Notification Plugin |
-| 打包 | WiX (MSI) + NSIS |
+| 通知 | Web Notification API (浏览器回退) |
+| 桌面打包 | WiX (MSI) + NSIS |
+| 安卓打包 | Gradle + NDK 交叉编译 |
 
 ---
 
 ## 📂 项目结构
 
 ```
-pomodoro-tauri/
+pomodoro-cc/
 ├── src/                        # 前端源码
 │   ├── index.html              # 主页面结构
 │   ├── style.css               # 样式表（暗色主题）
@@ -106,7 +134,18 @@ pomodoro-tauri/
 └── README.md                   # 本文件
 ```
 
+---
 
+## 📄 许可证
+
+MIT License
+
+---
+
+## 🙏 致谢
+
+- [Tauri](https://tauri.app/) — 轻量级跨平台桌面框架
+- [Pomodoro Technique](https://francescocirillo.com/pages/pomodoro-technique) — 番茄工作法发明者 Francesco Cirillo
 
 ---
 
