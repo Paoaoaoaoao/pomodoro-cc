@@ -13,9 +13,22 @@ let sessionCount = 0;              // 完成的专注轮数
 let tasks = [];                    // { id, text, completed, createdAt }
 
 // ---- Sound (使用 Web Audio API 生成提示音) ----
+let sharedAudioCtx = null;
+
+function getAudioContext() {
+  if (!sharedAudioCtx) {
+    sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  // Android WebView 会挂起 AudioContext，需要 resume
+  if (sharedAudioCtx.state === 'suspended') {
+    sharedAudioCtx.resume();
+  }
+  return sharedAudioCtx;
+}
+
 function playNotificationSound() {
   try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const ctx = getAudioContext();
     // 简单的三音提示
     [523.25, 659.25, 783.99].forEach((freq, i) => {
       const osc = ctx.createOscillator();
@@ -378,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
     Notification.requestPermission();
   }
 
-  // 键盘快捷键
+  // 键盘快捷键（仅当焦点不在输入框时生效）
   document.addEventListener('keydown', e => {
     if (e.code === 'Space' && e.target === document.body) {
       e.preventDefault();
