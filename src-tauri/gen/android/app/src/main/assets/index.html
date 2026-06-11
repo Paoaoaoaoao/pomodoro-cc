@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0f0f14" />
+  <link rel="manifest" href="manifest.json" />
+  <title>PomodoroCC - 番茄钟</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header>
+      <h1>🍅 PomodoroCC</h1>
+      <p class="subtitle">专注工作，高效完成任务</p>
+    </header>
+
+    <!-- Timer Section -->
+    <section class="timer-section">
+      <div class="mode-tabs">
+        <button id="workTab" class="mode-tab active" data-mode="work">🔥 专注</button>
+        <button id="breakTab" class="mode-tab" data-mode="break">☕ 休息</button>
+      </div>
+      <div class="timer-circle" id="timerCircle">
+        <svg viewBox="0 0 200 200" class="progress-ring">
+          <circle cx="100" cy="100" r="90" class="progress-ring-bg" />
+          <circle cx="100" cy="100" r="90" class="progress-ring-fill" id="progressRing" />
+        </svg>
+        <div class="timer-display">
+          <span class="timer-time" id="timerTime">25:00</span>
+          <span class="timer-label" id="timerLabel">准备开始</span>
+        </div>
+      </div>
+      <div class="timer-controls">
+        <button id="startBtn" class="btn btn-primary">
+          <span class="btn-icon">▶</span> 开始
+        </button>
+        <button id="pauseBtn" class="btn btn-secondary" disabled>
+          <span class="btn-icon">⏸</span> 暂停
+        </button>
+        <button id="resetBtn" class="btn btn-outline">
+          <span class="btn-icon">↺</span> 重置
+        </button>
+        <button id="skipBtn" class="btn btn-outline">
+          <span class="btn-icon">⏭</span> 跳过
+        </button>
+      </div>
+      <div class="session-info">
+        <span>已完成 <strong id="sessionCount">0</strong> 轮专注</span>
+        <button id="resetSessionBtn" class="btn-reset-session" title="清空计数">↺</button>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <hr class="divider" />
+
+    <!-- Task Section -->
+    <section class="task-section">
+      <h2>📋 任务清单</h2>
+      <div class="task-progress">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="taskProgressBar"></div>
+        </div>
+        <span class="task-progress-text" id="taskProgressText">0/0</span>
+      </div>
+      <div class="task-input-row">
+        <input
+          type="text"
+          id="taskInput"
+          placeholder="添加一个新任务..."
+          autocomplete="off"
+        />
+        <button id="addTaskBtn" class="btn btn-primary btn-sm">＋ 添加</button>
+      </div>
+      <ul class="task-list" id="taskList"></ul>
+      <div class="task-actions" id="taskActions" style="display: none;">
+        <button id="clearDoneBtn" class="btn btn-outline btn-sm">
+          🗑 清除已完成
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
