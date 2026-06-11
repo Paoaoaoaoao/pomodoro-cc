@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/tauri-apps/tauri/dev/crates/tauri-config-schema/schema.json",
+  "productName": "PomodoroCC",
+  "version": "0.1.0",
+  "identifier": "com.pomodoro.cc",
+  "build": {
+    "frontendDist": "../src",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "",
+    "beforeBuildCommand": ""
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "PomodoroCC - 番茄钟",
+        "width": 480,
+        "height": 680,
+        "resizable": true,
+        "center": true,
+        "minWidth": 400,
+        "minHeight": 600
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["msi", "nsis"],
+    "icon": [
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "wix": {
+        "language": "zh-CN"
+      },
+      "nsis": {
+        "installerIcon": "icons/icon.ico",
+        "languages": ["SimpChinese", "English"]
+      }
+    }
+  },
+  "plugins": {}
+}
